@@ -2,6 +2,10 @@ package com.devsuperior.dslearnbds.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_course")
@@ -15,6 +19,8 @@ public class Course implements Serializable {
     private String imgUri;
     private String imgGrayUri;
 
+    @OneToMany(mappedBy = "course")
+    private List<Offer> offers = new ArrayList<>();
 
 
     public Course() {
@@ -25,6 +31,10 @@ public class Course implements Serializable {
         this.name = name;
         this.imgUri = imgUri;
         this.imgGrayUri = imgGrayUri;
+    }
+
+    public List<Offer> getOffers() {
+        return offers;
     }
 
     public Long getId() {
