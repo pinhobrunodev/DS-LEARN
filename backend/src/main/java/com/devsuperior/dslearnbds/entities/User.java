@@ -2,7 +2,9 @@ package com.devsuperior.dslearnbds.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,6 +26,9 @@ public class User implements Serializable {
     private Set<Role> roles = new HashSet<>();
 
 
+    @OneToMany(mappedBy = "user")
+    private List<Notification> notifications = new ArrayList<>();
+
     public User() {
     }
 
@@ -33,6 +38,10 @@ public class User implements Serializable {
         this.name = name;
         this.email = email;
         this.password = password;
+    }
+
+    public List<Notification> getNotifications() {
+        return notifications;
     }
 
     public Long getId() {
