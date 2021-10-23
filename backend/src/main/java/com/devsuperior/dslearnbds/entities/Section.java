@@ -1,15 +1,11 @@
 package com.devsuperior.dslearnbds.entities;
 
-import com.devsuperior.dslearnbds.entities.enums.ResourceType;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
-@Table(name = "tb_resource")
-public class Resource implements Serializable {
+@Table(name = "tb_section")
+public class Section  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -17,28 +13,32 @@ public class Resource implements Serializable {
     private Long id;
     private String title;
     private String description;
-    private Integer position;
+    private String position;
     private String imgUri;
-    private ResourceType type;
 
     @ManyToOne
-    @JoinColumn(name = "offer_id")
-    private Offer offer;
+    @JoinColumn(name = "resource_id")
+    private Resource resource;
 
-    @OneToMany(mappedBy = "resource")
-    private List<Section> sections = new ArrayList<>();
+    // Auto-associação , para ir para outra seção é necessário terminar a anterior
+    // Somente a seção conhece essa associação - Unidirecional
+    @ManyToOne
+    @JoinColumn(name = "prerequisite_id")
+    private Section section;
 
-    public Resource() {
+
+    public Section() {
     }
 
-    public Resource(Long id, String title, String description, Integer position, String imgUri, ResourceType type) {
+    public Section(Long id, String title, String description, String position, String imgUri) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.position = position;
         this.imgUri = imgUri;
-        this.type = type;
     }
+
+
 
     public Long getId() {
         return id;
@@ -64,11 +64,11 @@ public class Resource implements Serializable {
         this.description = description;
     }
 
-    public Integer getPosition() {
+    public String getPosition() {
         return position;
     }
 
-    public void setPosition(Integer position) {
+    public void setPosition(String position) {
         this.position = position;
     }
 
@@ -80,15 +80,15 @@ public class Resource implements Serializable {
         this.imgUri = imgUri;
     }
 
-    public ResourceType getType() {
-        return type;
+    public Resource getResource() {
+        return resource;
     }
 
-    public void setType(ResourceType type) {
-        this.type = type;
+    public void setResource(Resource resource) {
+        this.resource = resource;
     }
 
-    public List<Section> getSections() {
-        return sections;
+    public Section getSection() {
+        return section;
     }
 }
