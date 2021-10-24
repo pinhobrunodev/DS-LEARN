@@ -51,5 +51,16 @@ public class AuthService {
 			throw new ForbiddenException("Acess denied");
 		}
 	}
+	
+	// Conteúdo customizado para usuário Logado
+	/*
+	 * Exemplo : Usuário logado quando acessar o /notifications
+	 * deve aparecer pra ele somente as notificações dele.
+	 * 
+	 */
+	
+	
+	
+	
 
 }
