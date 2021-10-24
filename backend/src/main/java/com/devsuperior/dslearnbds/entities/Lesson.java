@@ -20,6 +20,7 @@ OBS :
 
 Se for muitos campo , vai valer mais a pena gerar uma tabela pra cada
 
+Para cadastrar de fato uma Lesson precisa cadastrar um Content ou Task
 
  */
 
