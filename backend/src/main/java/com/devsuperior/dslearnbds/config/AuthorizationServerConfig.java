@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -44,6 +45,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	private AuthenticationManager authenticationManager;
 	@Autowired
 	private JwtTokenEnhancer jwtTokenEnhancer;
+	
+	
+	@Autowired
+	private UserDetailsService userDetailsService;
 
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
@@ -57,8 +62,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		.withClient(clientId) // nome da aplicacao
 		.secret(passwordEncoder.encode(clientSecret)) // senha da aplicacao
 		.scopes("read","write") // qual tipo de acesso q vou dar
-		.authorizedGrantTypes("password") // o tipo padrao do oAuth
-		.accessTokenValiditySeconds(jwtDuration);
+		.authorizedGrantTypes("password","refresh_token") // o tipo padrao do oAuth com refresh_token
+		.accessTokenValiditySeconds(jwtDuration)
+		.refreshTokenValiditySeconds(jwtDuration); // tempo do refreshToken
 	}
 	
 	// É Aqui que eu informo quem eu vou autorizar e o formato do token
@@ -72,7 +78,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		endpoints.authenticationManager(authenticationManager)
 		.tokenStore(tokenStore)
 		.accessTokenConverter(accessTokenConverter)
-		.tokenEnhancer(chain);
+		.tokenEnhancer(chain).userDetailsService(userDetailsService);
 	}
 
 }
