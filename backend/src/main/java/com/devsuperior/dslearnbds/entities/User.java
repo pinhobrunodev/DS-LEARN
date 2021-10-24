@@ -1,5 +1,7 @@
 package com.devsuperior.dslearnbds.entities;
 
+import com.devsuperior.dslearnbds.entities.pk.EnrollmentPK;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,7 +27,6 @@ public class User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-
     @OneToMany(mappedBy = "user")
     private List<Notification> notifications = new ArrayList<>();
 
@@ -40,9 +41,7 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public List<Notification> getNotifications() {
-        return notifications;
-    }
+
 
     public Long getId() {
         return id;
@@ -79,6 +78,11 @@ public class User implements Serializable {
     public Set<Role> getRoles() {
         return roles;
     }
+
+    public List<Notification> getNotifications() {
+        return notifications;
+    }
+
 
     @Override
     public int hashCode() {

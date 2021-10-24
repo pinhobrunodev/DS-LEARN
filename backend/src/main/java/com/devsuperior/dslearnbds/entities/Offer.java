@@ -4,7 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="tb_offer")
@@ -24,6 +26,8 @@ public class Offer  implements Serializable {
     @JoinColumn(name = "course_id")
     private Course course;
 
+
+
     @OneToMany(mappedBy = "offer")
     private List<Resource> resources = new ArrayList<>();
 
@@ -37,13 +41,7 @@ public class Offer  implements Serializable {
         this.endMoment = endMoment;
     }
 
-    public Course getCourse() {
-        return course;
-    }
 
-    public List<Resource> getResources() {
-        return resources;
-    }
 
     public Long getId() {
         return id;
@@ -76,4 +74,13 @@ public class Offer  implements Serializable {
     public void setEndMoment(Instant endMoment) {
         this.endMoment = endMoment;
     }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public List<Resource> getResources() {
+        return resources;
+    }
+
 }
