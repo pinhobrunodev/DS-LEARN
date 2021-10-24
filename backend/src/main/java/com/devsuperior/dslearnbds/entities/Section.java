@@ -2,10 +2,12 @@ package com.devsuperior.dslearnbds.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_section")
-public class Section  implements Serializable {
+public class Section implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -27,6 +29,10 @@ public class Section  implements Serializable {
     private Section section;
 
 
+    @OneToMany(mappedBy = "section")
+    private List<Lesson> lessions = new ArrayList<>();
+
+
     public Section() {
     }
 
@@ -37,7 +43,6 @@ public class Section  implements Serializable {
         this.position = position;
         this.imgUri = imgUri;
     }
-
 
 
     public Long getId() {
@@ -90,5 +95,9 @@ public class Section  implements Serializable {
 
     public Section getSection() {
         return section;
+    }
+
+    public List<Lesson> getLessions() {
+        return lessions;
     }
 }
