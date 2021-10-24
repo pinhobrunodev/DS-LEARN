@@ -20,9 +20,14 @@ public class UserService implements UserDetailsService {
 	private static Logger logger = LoggerFactory.getLogger(UserService.class);
 	@Autowired
 	private UserRepository repository;
-
+	@Autowired
+	private AuthService authService;
+	
+	
 	@Transactional(readOnly = true)
 	public UserDTO findById(Long id) {
+		// validação se o id for o mesmo do usuario logado.
+		authService.validateSelfOrAdmin(id);
 		return repository.findById(id).map(UserDTO::new)
 				.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 	}
@@ -37,4 +42,6 @@ public class UserService implements UserDetailsService {
 		logger.info("User found: " + email);
 		return user;
 	}
+	
+	
 }
