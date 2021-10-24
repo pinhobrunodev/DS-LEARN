@@ -41,8 +41,6 @@ public class User implements Serializable {
         this.password = password;
     }
 
-
-
     public Long getId() {
         return id;
     }
@@ -82,7 +80,6 @@ public class User implements Serializable {
     public List<Notification> getNotifications() {
         return notifications;
     }
-
 
     @Override
     public int hashCode() {
