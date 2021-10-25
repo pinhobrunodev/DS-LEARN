@@ -3,6 +3,20 @@
 
 O sistema consiste em uma plataforma de ensino que mantém informações de cursos, suas turmas e alunos, bem como um fórum para perguntas e respostas sobre os conteúdos do curso.
 
+## Competências adquiridas neste módulo do curso 
+
+### _Domínio e ORM_
+- Implementação de um modelo de domínio complexo (projeto DSLearn)
+- Instanciação (seed) de um modelo de domínio com SQL
+### _Autorizações_
+- Autorização customizada em nível de serviço
+- Conteúdo customizado para o usuário logado
+- Refresh token
+- Pré-autorização de métodos
+
+
+
+
 ## Tecnologias usadas
 
 ### Backend 
